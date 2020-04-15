@@ -20,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
 int Universiade::day = 0;
 int Universiade::mounth = 0;
 int Universiade::year = 0;
-string Universiade::name = "";
+//string Universiade::name = "";
 
 
 

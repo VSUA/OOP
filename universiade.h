@@ -1,8 +1,11 @@
+//
+// Created by Vlad on 13.04.2020.
+//
 #include <string>
 using namespace std;
-#ifndef UNIVERSIADE_H
-#define UNIVERSIADE_H
 
+#ifndef OOP9_UNIVERSIADE_H
+#define OOP9_UNIVERSIADE_H
 
 struct Person
 {
@@ -14,121 +17,127 @@ struct Person
     struct Person *prev;
 };
 
-
 class Universiade
 {
-public:
-    static string name;
+protected:
+     string name;
     static int day ;
     static int mounth ;
     static int year;
+    Person *StartOfList;
+    Person *getEndOfList();
 
 public:
-    Universiade(){};
-    string print()
+    Universiade(){StartOfList = nullptr;};
+    virtual string print()
     {
         return "Universiade";
     }
 
-    string print(string str)
+    virtual string print(string& str)
     {
         return str+"Universiade";
     }
-
-
     //Universiade(string name, int day, int mounth, int year);
-    void setDate(int day1,int mounth1, int year1)
+    static void setDate(int day1,int mounth1, int year1)
     {
         day = day1;
         mounth = mounth1;
         year = year1;
     };
-    void setName(string name1)
+     void setName(const string& name1)
     {
         name = name1;
     };
-    string getName()
+     string getName()
     {
         return name;
     };
-    int getday()
+    static int getday()
     {
         return day;
     };
-    int getmounth()
+    static int getmounth()
     {
         return mounth;
     };
-    int getyear()
+    static int getyear()
     {
         return year;
     };
+    Person *GetStart(){return StartOfList;};
+    void AddElement(string name, string surname, int result, string nameOfUniversity);
+    virtual ~Universiade(){};
 
 };
 
-
-class MoreBetter : public Universiade
+class LeaderList: virtual public Universiade
 {
 protected:
-
-    Person *StartOfList;
     Person *Leader;
 
-protected:
-
-    Person *getEndOfList();
-
 public:
-    MoreBetter(){};
+    Person *GetLeader(){return Leader;}
+    void SetLeader();
+    virtual string print()
+    {
+        return "LeaderList";
+    };
+
+    virtual string print(string& str)
+    {
+        return str+"LeaderList";
+    };
+    virtual ~LeaderList(){};
+};
+
+class WorkWithList: virtual public Universiade
+{
+public:
+    virtual void Sort() = 0;
+    int Size();
+    virtual string print()
+    {
+        return "WorkWithList";
+    };
+
+    virtual string print(string& str)
+    {
+        return str+"WorkWithList";
+    };
+    virtual ~WorkWithList(){};
+};
+
+class MoreBetter: public LeaderList, public WorkWithList
+{
+public:
     string print()
     {
         return "MoreBetter";
     }
 
-    string print(string str)
+    string print(string& str)
     {
         return str+"MoreBetter";
     }
-    Person *GetLeader(){return Leader;}
-    void SetLeader();
-    void AddElement(string name, string surname, int result, string nameOfUniversity);
     void Sort();
-    int Size();
-    Person *GetStart();
-
+    ~MoreBetter(){};
 };
 
-class SmallerBetter : public Universiade
+class SmallerBetter: public LeaderList, public WorkWithList
 {
-protected:
-
-    Person *StartOfList;
-    Person *Leader;
-
-protected:
-
-    Person *getEndOfList();
-
 public:
-    SmallerBetter(){};
     string print()
     {
         return "SmallerBetter";
     }
 
-    string print(string str)
+    string print(string& str)
     {
         return str+"SmallerBetter";
     }
-
-    Person *GetLeader(){return Leader;}
-    void SetLeader();
-    void AddElement(string name, string surname, int result, string nameOfUniversity);
     void Sort();
-    int Size();
-    Person *GetStart();
-
-
+    ~SmallerBetter(){};
 };
 
-#endif // UNIVERSIADE_H
+#endif //OOP9_UNIVERSIADE_H
