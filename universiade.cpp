@@ -1,6 +1,3 @@
-//
-// Created by Vlad on 13.04.2020.
-//
 
 #include "universiade.h"
 

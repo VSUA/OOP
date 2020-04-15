@@ -1,6 +1,4 @@
-//
-// Created by Vlad on 13.04.2020.
-//
+
 #include <string>
 using namespace std;
 
@@ -121,7 +119,16 @@ public:
         return str+"MoreBetter";
     }
     void Sort();
-    ~MoreBetter(){};
+    ~MoreBetter(){
+        Person * curr,* tmp;
+        curr = StartOfList;
+        while(curr != nullptr)
+        {
+            tmp = curr->next;
+            free(curr);
+            curr = tmp;
+        }
+    };
 };
 
 class SmallerBetter: public LeaderList, public WorkWithList
@@ -137,7 +144,16 @@ public:
         return str+"SmallerBetter";
     }
     void Sort();
-    ~SmallerBetter(){};
+    ~SmallerBetter(){
+        Person * curr,* tmp;
+        curr = StartOfList;
+        while(curr != nullptr)
+        {
+            tmp = curr->next;
+            free(curr);
+            curr = tmp;
+        }
+    };
 };
 
 #endif //OOP9_UNIVERSIADE_H
